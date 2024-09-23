@@ -1,0 +1,20 @@
+.item {
+  align-items: center;
+}
+
+.button {
+  margin-top: 0.5rem;
+  border-radius: 0.25rem;
+  box-shadow: 2px 2px 5px #000;
+  padding: 0.25rem;
+}
+
+.label {
+  padding: 0.25rem;
+  font-size: x-large;
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+}
