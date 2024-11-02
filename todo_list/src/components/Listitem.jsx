@@ -13,7 +13,7 @@ function ListItem(props) {
       <input
         type="checkbox"
         className={styles.checkbox}
-        onClick={handleCheckedState}
+        onChange={handleCheckedState}
       ></input>
       <label
         style={
@@ -24,7 +24,12 @@ function ListItem(props) {
       >
         {props.name}
       </label>
-      <button className={styles.button}>Удалить</button>
+      <button
+        className={styles.button}
+        onClick={() => props.deleteItem(props.id)}
+      >
+        Удалить
+      </button>
     </div>
   );
 }
