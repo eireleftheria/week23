@@ -1,6 +1,6 @@
-import { React } from "react";
+import { React, useState } from "react";
 import ListItem from "./Listitem";
-import AddButton from "./AddButton";
+import AddItem from "./AddItem";
 import styles from "./content.module.css";
 import useLocalStorage from "../hooks/useLocalStorage";
 
@@ -12,16 +12,34 @@ function Content() {
   //   { id: 4, name: "Приготовить ужин", isCheked: false, color: "green" },
   // ];
 
-  const [items, setItems] = useLocalStorage("toDoList", []);
+  // const itemsJSON = [
+  //   {
+  //     id: 1,
+  //     name: "Посмотреть урок по Реакту",
+  //     isChecked: false,
+  //     color: "red",
+  //   },
+  //   { id: 2, name: "Сделать домашку", isChecked: false, color: "black" },
+  //   { id: 3, name: "Отдохнуть", isChecked: true, color: "blue" },
+  //   { id: 4, name: "Приготовить ужин", isChecked: false, color: "green" },
+  // ];
 
-  // useEffect(() => {
-  //   setItems(JSON.parse(localStorage.getItem("toDoList")));
-  // }, []);
+  const [items, setItems] = useLocalStorage("toDoList", []);
+  const [newItem, setNewItem] = useState("");
 
   const deleteItem = (id) => {
     const updatedList = items.filter((item) => item.id !== id);
     setItems(updatedList);
-    // localStorage.setItem("toDoList", JSON.stringify(updatedList));
+  };
+
+  const addItem = (e) => {
+    e.preventDefault();
+    console.log(newItem);
+    const id = items.length ? items[items.length - 1].id + 1 : 1;
+    const itemToAdd = { id, name: newItem, isChecked: false };
+    const updatedList = [...items, itemToAdd];
+    setItems(updatedList);
+    setNewItem("");
   };
 
   return (
@@ -36,7 +54,7 @@ function Content() {
           />
         ))}
       </ul>
-      <AddButton />
+      <AddItem newItem={newItem} setNewItem={setNewItem} addItem={addItem} />
     </main>
   );
 }

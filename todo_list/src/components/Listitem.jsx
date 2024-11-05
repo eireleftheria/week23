@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./listItem.module.css";
 
-function ListItem(props) {
+function ListItem({ id, name, deleteItem }) {
   const [checked, setChecked] = useState(false);
 
   const handleCheckedState = () => {
@@ -9,10 +9,11 @@ function ListItem(props) {
   };
 
   return (
-    <div className={styles.item} {...props}>
+    <div className={styles.item}>
       <input
         type="checkbox"
         className={styles.checkbox}
+        checked={checked}
         onChange={handleCheckedState}
       ></input>
       <label
@@ -22,12 +23,9 @@ function ListItem(props) {
             : { textDecoration: "none" }
         }
       >
-        {props.name}
+        {name}
       </label>
-      <button
-        className={styles.button}
-        onClick={() => props.deleteItem(props.id)}
-      >
+      <button className={styles.button} onClick={() => deleteItem(id)}>
         Удалить
       </button>
     </div>
