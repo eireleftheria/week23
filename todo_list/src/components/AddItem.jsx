@@ -1,12 +1,19 @@
-import { React } from "react";
+import { React, useRef } from "react";
 import styles from "./addButton.module.css";
 
 export default function AddItem({ newItem, setNewItem, addItem }) {
   // const [category, setCategory] = useState("home");
 
+  const ref = useRef();
+
+  const focus = () => {
+    ref.current.focus();
+  };
+
   return (
     <form className={styles.create}>
       <input
+        ref={ref}
         type="text"
         required
         value={newItem}
@@ -19,6 +26,7 @@ export default function AddItem({ newItem, setNewItem, addItem }) {
       <button type="submit" onClick={addItem}>
         Добавить
       </button>
+      <button onClick={focus}>Focus</button>
       <p>{newItem}</p>
       {/* <p>{category}</p> */}
     </form>
